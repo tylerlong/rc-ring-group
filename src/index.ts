@@ -13,5 +13,12 @@ const rc = new RingCentral({
     password: process.env.RINGCENTRAL_PASSWORD!,
   });
   console.log(rc.token?.access_token);
+  const r = await rc
+    .restapi()
+    .account()
+    .extension()
+    .answeringRule('business-hours-rule')
+    .get();
+  console.log(JSON.stringify(r, null, 2));
   await rc.revoke();
 })();
